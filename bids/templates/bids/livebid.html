@@ -1,0 +1,36 @@
+
+{% load static %}
+{%block js-link%}
+
+<script src="{% static 'bids/livebid.js'%}" ></script>
+{%endblock%}
+{%block content%}
+
+
+<div class="row">
+    <span id="bidpk">{{pk}}</span>
+    <span id="user-id">{{request.user.id}}</span>
+    <span >the highest bid is</span>
+    <span id="highest">0</span>
+
+
+  <div class="mb-5" >
+
+
+      <input id="bid-price">
+
+  </div>
+
+  <div>
+      <button id="submit-btn"  class="btn btn-primary w-full">
+
+          ثبت
+        </button>
+
+  </div>
+  {% include 'bids/livebiderlist.html' %}
+
+</div>
+{%endblock%}
+
+</div>

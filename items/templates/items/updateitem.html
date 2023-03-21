@@ -1,0 +1,30 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+
+{%block content%}
+
+<div class="row">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{form.as_p}}
+        {% csrf_token %}
+        <button type="submit" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+
+         update
+        </button>
+
+    </form>
+</div>
+
+
+
+{%endblock%}
+{%block js-link%}
+<script>
+  $(function() {
+    $('.datepicker').datepicker();
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+{%endblock%}

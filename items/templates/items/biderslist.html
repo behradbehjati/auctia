@@ -1,0 +1,63 @@
+<div class="table-responsive" dir="rtl">
+    {%if highest_bider != 0%}
+  <table class="table table-hover table-nowrap">
+    <thead class="table-light">
+      <tr>
+
+        <th scope="col">نام کاربر</th>
+        <th scope="col">عدد پیشنهادی</th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+
+
+
+    <tr>
+
+
+
+        <td data-label="username">
+          <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+          <a class="text-heading font-semibold" href="#">
+             {{highest_bider.username}}
+
+          </a>
+        </td>
+        <td data-label="bid-price">
+          <span>{{highest_price}}</span>
+        </td>
+
+
+        <td data-label="" class="text-end">
+          <div class="dropdown">
+            <a class="text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-three-dots-vertical"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a href="#!" class="dropdown-item">
+                Action
+              </a>
+              <a href="#!" class="dropdown-item">
+                Another action
+              </a>
+              <a href="#!" class="dropdown-item">
+                Something else here
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+
+
+    </tbody>
+  </table>
+    {%else%}
+    <span>هنوز پیشنهادی برای این کالا ثبت نشده است </span>
+      {%endif%}
+</div>

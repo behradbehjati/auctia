@@ -1,0 +1,51 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+
+{%block content%}
+
+<div class="row">
+   {{name}}
+</div>
+{%if items%}
+<div class="row">
+
+
+
+{%for item in items%}
+    <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl">
+<div class="card">
+  <!-- Image -->
+  <div class="p-2">
+    <img alt="..." src="{{item.image1.url}}" class="card-img">
+  </div>
+  <!-- Card Body -->
+  <div class="card-body">
+    <!-- Title -->
+    <h3 class="h4">{{item.name}}</h3>
+    <!-- Subtitle -->
+    <span class="d-block text-muted text-sm font-semibold">{{item.biding_end_date}}</span>
+    <p class="mt-4 mb-6">
+      {{item.description}}
+    </p>
+    <a href="{%url 'items:detailitemview' item.pk%}" class="btn btn-sm btn-primary">
+      جزییات
+    </a>
+  </div>
+</div>
+    </div>
+{%endfor%}
+</div>
+{%else%}
+<div>شما کالایی برای نمایش ندارید</div>
+{%endif%}
+    <button type="submit" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+
+          <a href="{%url 'items:createitemview'%}">
+             کالای خود را اضافه کنید
+          </a>
+        </button>
+
+
+
+{%endblock%}

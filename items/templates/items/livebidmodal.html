@@ -1,0 +1,44 @@
+
+<div id="popup" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button id="reset-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+  let bidpk=1;
+  let submitBtn=1;
+  let bidPrice=1;
+  let userId=1;
+  let socket=1;
+  let tbody=1;
+  let tr
+  let id
+  let price
+  let time
+  let fetchChartData
+  let highest
+  let makeChart
+  let updateChart
+
+
+  $(document).on("click", ".open-incident", function (e) {
+    e.preventDefault();
+    var $popup = $("#popup");
+    var popup_url = $(this).data("popup-url");
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+    });
+  });
+  console.log('yes')
+
+</script>
+
+

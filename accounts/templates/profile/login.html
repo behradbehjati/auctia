@@ -1,0 +1,33 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+
+{%block content%}
+<form method="POST">
+  <div class="mb-5">
+    <label class="form-label" for="username">Username</label>
+
+      {{form.username}}
+  </div>
+  <div class="mb-5">
+    <label class="form-label" for="password">Password</label>
+    {{form.password}}
+  </div>
+
+  <div>
+      <button type="submit" class="btn btn-primary w-full">
+
+          ورود
+        </button>
+  
+  </div>
+    {% csrf_token %}
+</form>
+
+
+
+
+
+
+
+{%endblock%}
