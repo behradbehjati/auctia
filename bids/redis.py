@@ -47,3 +47,7 @@ def current_highest_bid_sync(item_id):
     highest_bider=redis_client.zrevrange(f'bidders:{item_id}', 0,0, withscores=True)
     print(highest_bider)
     return highest_bider
+def get_top2_bidders(item_id):
+    top2_bidders = redis_client.zrevrange(f'bidders:{item_id}', 0, 1, withscores=True)
+    return top2_bidders
+

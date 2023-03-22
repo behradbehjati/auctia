@@ -10,12 +10,9 @@ socket=new WebSocket(
     'ws://127.0.0.1:8001/ws/'+bidpk+'/');
 console.log(socket)
 socket.onmessage=function(e){
-
+console.log(e.data)
 
 let {sender,message}=JSON.parse(e.data)
-
-
-
 updateChart()
 
 
@@ -47,6 +44,7 @@ fetchChartData=async()=>{
     return data
     };
 highest=document.getElementById('highest')
+
 makeChart= async()=>{
     let data=await fetchChartData()
     console.log(data)
@@ -85,5 +83,6 @@ updateChart = async () => {
 
 socket.onopen=function(e){
 updateChart()
+console.log(e.data+'yahhh')
 };
 

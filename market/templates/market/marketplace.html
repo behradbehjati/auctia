@@ -4,26 +4,28 @@
 
 {%block content%}
 
-<div class="row">
 
-hello
 
-</div>
 <div class="row">
+<div class="row d-flex justify-content-center">
+  <div class="text-center">مزایده های درجریان</div>
+</div><br>
+
 
 {%for item in public_items%}
-<div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl">
+  {%if item.auction_status == True%}
+    <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl">
 <div class="card">
   <!-- Image -->
   <div class="p-2">
-    <img alt="..." src="https://images.unsplash.com/photo-1612892483236-52d32a0e0ac1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&h=400&q=80" class="card-img">
+    <img alt="Card image cap" src="{{item.image1.url}}" class="card-img-top" >
   </div>
   <!-- Card Body -->
   <div class="card-body">
     <!-- Title -->
-    <h3 class="h4"></h3>
-    <!-- Subtitle -->{{item.name}}
-    <span   class="d-block text-muted text-sm font-semibold">{{item.biding_end_date}}</span>
+    <h3 class="h4">{{item.name}}</h3>
+    <!-- Subtitle -->
+    <span class="d-block text-muted text-sm font-semibold">{{item.biding_end_date}}</span>
     <p class="mt-4 mb-6">
       {{item.description}}
     </p>
@@ -32,11 +34,47 @@ hello
     </a>
   </div>
 </div>
-
     </div>
+
+{%endif%}
 {%endfor%}
 
+<div class="row d-flex justify-content-center">
+  <div class="text-center">مزایده های پایان یافته</div>
+</div><br>
+
+
+
+{%for item in public_items%}
+  {%if item.auction_status != True%}
+    <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl">
+<div class="card">
+  <!-- Image -->
+  <div class="p-2">
+    <img alt="..." src="{{item.image1.url}}" class="card-img">
+  </div>
+  <!-- Card Body -->
+  <div class="card-body">
+    <!-- Title -->
+    <h3 class="h4">{{item.name}}</h3>
+    <!-- Subtitle -->
+    <span class="d-block text-muted text-sm font-bold">پایان یافته</span>
+    <p class="mt-4 mb-6">
+      {{item.description}}
+    </p>
+    <a href="{%url 'items:detailitemview' item.pk%}" class="btn btn-sm btn-primary">
+      جزییات
+    </a>
+  </div>
 </div>
+    </div>
+
+{%endif%}
+{%endfor%}
+</div>
+
+
+
 
 
 {%endblock%}

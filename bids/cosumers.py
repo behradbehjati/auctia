@@ -1,18 +1,37 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
-from .redis import add_bid,get_top10_bidders,current_highest_bid
+from .redis import add_bid,current_highest_bid
 from asgiref.sync import sync_to_async
 from market.models import Item
+
+
+"""
+make a query async for channels
+"""
+@sync_to_async()
+def item_query(item_id):
+    return Item.objects.get(id=item_id)
+
+
 
 class DashboardConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         bidpk=self.scope['url_route']['kwargs']['pk']
         self.bidpk=bidpk
         self.room_group_name=f'livebid-{bidpk}'
-        await self.channel_layer.group_add(self.room_group_name,self.channel_name)
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
+        if (await item_query(self.bidpk)).auction_status == False:
+           await self.close(4003)
+
+
+
+
+
+
+
     async def disconnect(self,close_code):
-        print(f'connection closed with code:{close_code}')
+
         await  self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
@@ -23,10 +42,13 @@ class DashboardConsumer(AsyncWebsocketConsumer):
         sender=text_data_json['sender']
 
         result= await current_highest_bid(self.bidpk)
-        print(result)
+        minimum_bid= result[0][1] if len(result)!=0 else  (await item_query(self.bidpk)).starting_bid_price
 
 
-        if len(result)!=0 and float(message) <= float(result[0][1]):
+
+
+
+        if float(message) <= float(minimum_bid):
 
             # Send an error message back to the user
             self.send(text_data="error")

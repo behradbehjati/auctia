@@ -9,5 +9,5 @@ class CreateItemForm(ModelForm):
 
         }
         model=Item
-        exclude=('seller','buyer','current_highest_bid','payment_information','shipping_information',)
+        exclude=('seller','buyer','potential_buyer','second_potential_buyer','current_highest_bid','payment_information','shipping_information','auction_status')
         widgets=CREATEITEM

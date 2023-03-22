@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "items.apps.ItemsConfig",
     "bids.apps.BidsConfig",
+    "payment.apps.PaymentConfig",
 
 
     #installed-packages
@@ -150,5 +151,7 @@ REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB=0
 
+#celery setting
+CELERY_BROKER_URL = 'amqp://localhost'
 
 

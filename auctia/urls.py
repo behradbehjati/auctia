@@ -24,4 +24,5 @@ urlpatterns = [
     path("profile/",include('accounts.urls',namespace='accounts')),
     path("items/",include('items.urls',namespace='items')),
     path("livebid/",include('bids.urls',namespace='bids')),
+    path("payment/",include('payment.urls',namespace='payment')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
