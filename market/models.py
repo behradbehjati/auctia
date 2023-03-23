@@ -30,13 +30,11 @@ class Item(models.Model):
     buy_it_now_price=models.IntegerField(validators=[MinValueValidator(1)])
     current_highest_bid=models.IntegerField(blank=True,null=True,validators=[MinValueValidator(1)])
     bid_increment=models.IntegerField(blank=True,null=True,validators=[MinValueValidator(1)])
-    payment_information=models.OneToOneField( 'Payment',on_delete=models.CASCADE,blank=True,null=True)
 
     biding_end_date=models.DateTimeField()
     create_date=models.DateTimeField(auto_now_add=True)
 
 
-    shipping_information=models.OneToOneField('Shiping',on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -54,11 +52,6 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
-    class Payment(models.Model):
-        pass
-    class Shiping(models.Model):
-        pass
-
 
 
 

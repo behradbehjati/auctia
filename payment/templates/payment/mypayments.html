@@ -1,0 +1,125 @@
+{% extends 'base/base.html'%}
+
+{% load static %}
+{%block js-link%}
+
+
+{%endblock%}
+{%block content%}
+
+
+<div class="card mb-7" dir="rtl">
+          <div class="card-header">
+            <h5 class="mb-0">حساب و کتاب ها</h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">وصعیت</th>
+                  <th scope="col">کالا</th>
+                  <th scope="col">قیمت</th>
+                  <th scope="col">طرف پرداخت</th>
+                  <th scope="col">مهلت پرداخت </th>
+                  <th scope="col">وضعیت پرداخت</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {%if payments%}
+
+              {%for payment in payments%}
+              {%if payment.debtor == request.user%}
+                <tr>
+                   <td>
+                     پرداختی
+                  </td>
+  `
+
+                  <td>
+                    <img alt="..." src="{{payment.item.image1.url}}" class="avatar avatar-sm rounded-circle me-2">
+                    <a class="text-heading font-semibold" href="{%url 'items:detailitemview' payment.item.id%}">
+                      {{payment.item.name}}
+                    </a>
+                  </td>
+                  <td>
+                    {{payment.price}}
+                  </td>
+
+                  <td>
+                    <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+                    <a class="text-heading font-semibold" href="#">
+                      {{payment.creditor}}
+                    </a>
+                  </td>
+                   <td>
+                     {{payment.expire_time}}
+                  </td>
+                  {%if payment.paid == False%}
+                  <td class="text-end">
+                    <a href="#" class="btn btn-success">پرداخت</a>
+
+                  </td>
+                  {%else%}
+                   <td class="text-end">
+                    <a href="#" class="btn btn-sm btn-neutral">پرداخت شده</a>
+
+
+
+                  </td>
+                  {%endif%}
+
+
+                </tr>
+              {%elif payment.creditor == request.user %}
+                   <tr>
+                   <td>
+                     دریافتی
+                  </td>
+  `
+
+                  <td>
+                    <img alt="..." src="{{payment.item.image1.url}}" class="avatar avatar-sm rounded-circle me-2">
+                    <a class="text-heading font-semibold" href="{%url 'items:detailitemview' payment.item.id%}">
+                      {{payment.item.name}}
+                    </a>
+                  </td>
+                  <td>
+                    {{payment.price}}
+                  </td>
+
+                  <td>
+                    <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+                    <a class="text-heading font-semibold" href="#">
+                      {{payment.debtor}}
+                    </a>
+                  </td>
+                   <td>
+                     {{payment.expire_time}}
+                  </td>
+                  {%if payment.paid == False%}
+                  <td class="text-end">
+                    <span>پرداخت نشده</span>
+
+                  </td>
+                  {%else%}
+                   <td class="text-end">
+                  <span>پرداخت نشده</span>
+
+
+
+                  </td>
+                  {%endif%}
+
+
+                </tr>
+              {%endif%}
+               {%endfor%}
+              {%else%}
+              <span>شما حساب و کتابی ندارید</span>
+              {%endif%}
+              </tbody>
+            </table>
+          </div>
+</div>
+{%endblock%}

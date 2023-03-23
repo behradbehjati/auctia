@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "items.apps.ItemsConfig",
     "bids.apps.BidsConfig",
     "payment.apps.PaymentConfig",
+    "notification.app.NotificationConfig",
 
 
     #installed-packages

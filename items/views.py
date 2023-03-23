@@ -25,7 +25,8 @@ class CreateItemView(LoginRequiredMixin,FormView):
     def form_valid(self, form):
         form.instance.seller = self.request.user
         form.save()
-        eta = form.cleaned_data['biding_end_date']
+       # eta = form.cleaned_data['biding_end_date']
+        eta = datetime.now()+timedelta(minutes=2)
         end_bid_date_reached.apply_async([form.instance.id], eta=eta)
         messages.success(self.request, 'Your item has been added successfully')
         return super().form_valid(form)

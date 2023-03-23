@@ -25,4 +25,5 @@ urlpatterns = [
     path("items/",include('items.urls',namespace='items')),
     path("livebid/",include('bids.urls',namespace='bids')),
     path("payment/",include('payment.urls',namespace='payment')),
+    path("notification/",include('notification.urls',namespace='notification')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
