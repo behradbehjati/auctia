@@ -20,9 +20,9 @@ class Item(models.Model):
     ItemCondition = models.TextChoices('ItemCondition', 'نو  کارکرده خراب')
     condition= models.CharField(blank=False, choices=ItemCondition.choices, max_length=10)
     description=models.TextField()
-    image1=models.ImageField(upload_to='item/%Y/%M', height_field=None, width_field=None, max_length=100)
-    image2=models.ImageField(upload_to='item/%Y/%M', height_field=None, width_field=None, max_length=100,blank=True,null=True)
-    image3=models.ImageField(upload_to='item/%Y/%M', height_field=None, width_field=None, max_length=100,blank=True,null=True)
+    image1=models.ImageField(upload_to=None,height_field=None, width_field=None, max_length=500)
+    image2=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=500,blank=True,null=True)
+    image3=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=500,blank=True,null=True)
 
 
     starting_bid_price=models.IntegerField(validators=[MinValueValidator(1)])

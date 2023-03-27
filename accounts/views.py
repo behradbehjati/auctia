@@ -13,6 +13,7 @@ from market.models import Item
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from notification.notifs_tasks import notif_creation_task
 
 
 
@@ -66,6 +67,7 @@ class RegisterView(CreateView):
         username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
         new_user = authenticate(username=username, password=password)
         login(self.request, new_user)
+        notif_creation_task.delay(self.request.user.id, f'کاربر گرامی به آکتیا خوش آمدید')
         return valid
 
 

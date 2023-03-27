@@ -1,0 +1,69 @@
+
+{% extends 'base/base.html'%}
+{% load static %}
+
+
+{%block content%}
+
+<div class="card mb-20" dir="rtl">
+          <div class="card-header">
+            <h5 class="mb-0">نوتیفیکشین ها</h5>
+          </div>
+          <div class="table-responsive">
+              {%if notifications%}
+            <table class="table table-hover table-nowrap">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">توضیجات</th>
+
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+
+
+              {%for notif in notifications%}
+
+                <tr>
+
+
+                  <td>
+                    <img alt="..." src="" class="avatar avatar-sm rounded-circle me-2">
+
+
+                    </a>
+                  </td>
+
+                   <td class="text-end">
+                    <span>{{notif}}</span>
+
+
+
+                  </td>
+
+
+
+                </tr>
+
+
+
+
+               {%endfor%}
+
+
+              </tbody>
+            </table>
+                 {%else%}
+              <span>شما نوتیفیکیشن نخوانده ای ندارید</span>
+              {%endif%}
+          </div>
+</div>
+
+
+
+{%endblock%}
+{%block js-link%}
+
+
+{%endblock%}

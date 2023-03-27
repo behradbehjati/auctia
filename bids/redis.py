@@ -1,6 +1,6 @@
 import time
 
-import redis,time
+import redis
 from django.conf import settings
 from django.contrib.auth.models import User
 from datetime import datetime,timezone
@@ -9,7 +9,7 @@ from channels.db import database_sync_to_async
 
 
 # Create a Redis client
-redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,db=settings.REDIS_DB)
+redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,db=0)
 
 
 

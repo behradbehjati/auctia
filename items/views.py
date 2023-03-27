@@ -10,9 +10,12 @@ from django.views import View
 from django.shortcuts import get_object_or_404,render
 from bids.redis import current_highest_bid_sync,get_top2_bidders
 from django.contrib.auth.models import User
-from .tasks import end_bid_date_reached
+from .item_tasks import end_bid_date_reached
 from datetime import datetime,timedelta
 from bids.redis import get_top2_bidders
+"""emails should be complete and thest of to 30th march"""
+# from notification.email_tasks import test_email
+from notification.notifs_tasks import notif_creation_task
 
 
 
@@ -29,6 +32,8 @@ class CreateItemView(LoginRequiredMixin,FormView):
         eta = datetime.now()+timedelta(minutes=2)
         end_bid_date_reached.apply_async([form.instance.id], eta=eta)
         messages.success(self.request, 'Your item has been added successfully')
+        # test_email.delay(form.instance.seller.id)
+        notif_creation_task.delay(self.request.user.id,f'مزایده‌ی کالای شما آغاز گردید')
         return super().form_valid(form)
 
 
@@ -61,6 +66,8 @@ class DetailItemView(View):
         highest_price=highest_bid[0][1] if highest_bid else 0
         highest_bider=User.objects.get(id=highest_bid[0][0]) if highest_bid else 0
         buy_it_now_price=Item.objects.get(id=pk).buy_it_now_price
+
+
         context={
 
             'item':item,

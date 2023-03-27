@@ -42,14 +42,17 @@ INSTALLED_APPS = [
     "items.apps.ItemsConfig",
     "bids.apps.BidsConfig",
     "payment.apps.PaymentConfig",
-    "notification.app.NotificationConfig",
+    "notification.apps.NotificationConfig",
 
 
     #installed-packages
     "channels",
-
+    "storages",
 
 ]
+
+
+
 
 
 MIDDLEWARE = [
@@ -140,7 +143,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -150,9 +153,31 @@ LOGIN_URL="/profile/login/"
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
-REDIS_DB=0
+
 
 #celery setting
 CELERY_BROKER_URL = 'amqp://localhost'
+
+
+#email_setting
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'ac256aefed5912'
+EMAIL_HOST_PASSWORD = '088cdb6ba4ffa6'
+EMAIL_PORT = '2525'
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID='bad1ee1d-334d-4c11-a686-fdd3ea8fb21d'
+AWS_SECRET_ACCESS_KEY='5c8616daf01886479ddcad76169f5d53bba0f28e'
+AWS_S3_ENDPOINT_URL='https://s3.ir-thr-at1.arvanstorage.ir'
+AWS_STORAGE_BUCKET_NAME='auctia'
+AWS_SERVICE_NAME='s3'
+AWS_S3_FILE_OVERWRITE=False
+
 
 

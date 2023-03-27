@@ -3,7 +3,7 @@ import json
 from .redis import add_bid,current_highest_bid
 from asgiref.sync import sync_to_async
 from market.models import Item
-
+from notification.notifs_tasks import notif_creation_task
 
 """
 make a query async for channels
@@ -42,6 +42,7 @@ class DashboardConsumer(AsyncWebsocketConsumer):
         sender=text_data_json['sender']
 
         result= await current_highest_bid(self.bidpk)
+
         minimum_bid= result[0][1] if len(result)!=0 else  (await item_query(self.bidpk)).starting_bid_price
 
 
@@ -53,6 +54,7 @@ class DashboardConsumer(AsyncWebsocketConsumer):
             # Send an error message back to the user
             self.send(text_data="error")
         else:
+            notif_creation_task.delay(result[0][0].decode('utf-8'),f' پیشنهادی بالاتر از پیشنهاد شما ثبت شد #{self.bidpk}')
             await self.save_bid(float(message),sender,self.bidpk)
 
 
