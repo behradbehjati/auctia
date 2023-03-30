@@ -117,7 +117,7 @@
                 data-popup-url="{% url 'bids:livebidview' item.pk %}">شرکت در مزایده </a>
 
                     {% elif  item.seller == request.user %}
-                    <a href="#">مشاهده‌ی نتایج</a>
+                    <a href="{%url 'items:updateitemview' item.id%}">اعمال تغییرات</a>
 
 
                   {%else%}

@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator,MaxValueValidator,MinValueValidator
 from datetime import datetime,timezone,timedelta
 
+
 class Item(models.Model):
 
     seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='my_items')
@@ -45,6 +46,7 @@ class Item(models.Model):
 
     def save(self,*args,**kwargs):
         self.slug=slugify(self.name)
+
 
         super(Item, self).save(*args, **kwargs)
 

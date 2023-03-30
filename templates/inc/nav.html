@@ -46,33 +46,19 @@
               <i class="bi bi-bar-chart"></i>           بازارچه
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="bi bi-chat"></i>گفت و گو
-              <span class="  badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">6</span>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="{%url 'payment:mypaymentsview'%}">
               <i class="bi bi-bookmarks"></i> حساب و کتاب
             </a>
           </li>
 
-        </ul>
-        <!-- Divider -->
-        <hr class="navbar-divider my-5 opacity-20">
-        <!-- Navigation -->
-        <ul class="navbar-nav mb-md-4">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="bi bi-gear"></i> Settings
-            </a>
-          </li>
+
           <li class="nav-item">
 
             <a class="nav-link" href="{%url 'notification:notificationview'%}">
               <i class="bi bi-bell"></i> نوتیفیکیشن ها
-              <span class="badge bg-opacity-30 bg-danger text-danger rounded-pill d-inline-flex align-items-center ms-auto">23</span>
+              <span class="badge bg-opacity-30 bg-danger text-danger rounded-pill d-inline-flex align-items-center ms-auto">{{notif_count}}</span>
             </a>
           </li>
         </ul>

@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from notification.notifs_tasks import notif_creation_task
-
+from .forms import RegisterForm
 
 
 class LoginView(View):
@@ -39,16 +39,15 @@ class LoginView(View):
         if form.is_valid():
             data=form.cleaned_data
             username=User.objects.filter(username=data['username']).exists()
-            if not username:
-                raise ValidationError('Username is wrong')
-            user=authenticate(username=data['username'],password=data['password'])
-            if user is not None:
-                login(request,user)
-                if redirect_to:
-                    return redirect(redirect_to)
-                return redirect('accounts:dashboardview')
+            if username:
 
-            messages.error(request,_('The username or password is incorrect'))
+                user=authenticate(username=data['username'],password=data['password'])
+                if user is not None:
+                    login(request,user)
+                    if redirect_to:
+                        return redirect(redirect_to)
+                    return redirect('accounts:dashboardview')
+
         messages.error(request,_('The username or password is incorrect'))
         return render(request,'profile/login.html',context)
 @login_required
@@ -59,7 +58,7 @@ def LogoutView(request):
 
 class RegisterView(CreateView):
     model = User
-    form_class=UserCreationForm
+    form_class=RegisterForm
     template_name = 'profile/register.html'
     success_url = reverse_lazy('market:marketplaceview')
     def form_valid(self, form):

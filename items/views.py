@@ -42,8 +42,10 @@ class CreateItemView(LoginRequiredMixin,FormView):
         return super().form_invalid(form)
 class UpdateItemView(LoginRequiredMixin,ItemOwnerMixin,UpdateView):
     model = Item
-    fields= ('name', 'description', 'image1', 'image2', 'image3')
+    form_class =CreateItemForm
+
     template_name = 'items/updateitem.html'
+
 
     def get_success_url(self):
         if self.object.pk:
